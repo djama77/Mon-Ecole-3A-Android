@@ -1,6 +1,6 @@
 import { registerPlugin } from '@capacitor/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-const ocr=registerPlugin('OfflineOcr');const $=id=>document.getElementById(id);const books=await(await fetch('catalogue.json')).json();
+const ocr=registerPlugin('OfflineOcr');const $=id=>document.getElementById(id);async function initialise(){const books=await(await fetch('catalogue.json')).json();
 for(const b of books){const opt=document.createElement('option');opt.value=b.id;opt.textContent=b.nom;$('book').append(opt)}
 pdfjsLib.GlobalWorkerOptions.workerSrc='pdf.worker.js';let pdf=null,rendering=false;let current=1;
 async function loadBook(){try{$('pdfstatus').textContent='Ouverture du guide…';const b=books[Number($('book').value)];pdf=await pdfjsLib.getDocument('guides/'+b.fichier).promise;current=1;$('page').max=pdf.numPages;$('total').textContent='/ '+pdf.numPages;await render()}catch(e){$('pdfstatus').textContent='Erreur PDF : '+e.message}}
@@ -10,4 +10,5 @@ async function recognize(dataUrl){$('ocrstatus').textContent='Reconnaissance loc
 $('camera').onclick=async()=>{try{const p=await Camera.getPhoto({quality:75,resultType:CameraResultType.DataUrl,source:CameraSource.Camera,width:1400});$('preview').src=p.dataUrl;$('preview').hidden=false;await recognize(p.dataUrl)}catch(e){$('ocrstatus').textContent='Photo annulée ou impossible : '+e.message}};
 $('file').onchange=()=>{const f=$('file').files?.[0];if(!f)return;const r=new FileReader();r.onload=async()=>{$('preview').src=r.result;$('preview').hidden=false;await recognize(r.result)};r.readAsDataURL(f)};
 function solve(t){let s=t.replace(/,/g,'.').replace(/[×xX]/g,'*').replace(/[÷:]/g,'/').replace(/[−–]/g,'-');let m=s.match(/(-?\d+(?:\.\d+)?)\s*([+*\/-])\s*(-?\d+(?:\.\d+)?)/);if(!m)return 'Je ne peux pas encore corriger automatiquement cet exercice. Le moteur local V3 reconnaît les opérations arithmétiques simples.';const a=Number(m[1]),b=Number(m[3]),op=m[2];if(op==='/'&&b===0)return 'Division par zéro impossible.';const v=op==='+'?a+b:op==='-'?a-b:op==='*'?a*b:a/b;const operation={'+':'addition','-':'soustraction','*':'multiplication','/':'division'}[op];return 'Opération détectée : '+a+' '+op+' '+b+'\nMéthode : effectuer la '+operation+'.\nRésultat : '+Number(v.toPrecision(12))+'\nVérifiez que l’opération reconnue correspond à l’exercice photographié.'}
-$('solve').onclick=()=>{$('result').textContent=solve($('statement').value)};await loadBook();
+$('solve').onclick=()=>{$('result').textContent=solve($('statement').value)};await loadBook();}
+initialise().catch(e=>{document.getElementById('pdfstatus').textContent='Erreur initialisation : '+e.message;});
