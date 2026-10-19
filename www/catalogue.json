@@ -1,0 +1,44 @@
+[
+  {
+    "id": 0,
+    "nom": "Français",
+    "fichier": "francais.pdf",
+    "pages": 216
+  },
+  {
+    "id": 1,
+    "nom": "Mathématiques",
+    "fichier": "mathematiques.pdf",
+    "pages": 176
+  },
+  {
+    "id": 2,
+    "nom": "Arabe",
+    "fichier": "arabe.pdf",
+    "pages": 184
+  },
+  {
+    "id": 3,
+    "nom": "Anglais",
+    "fichier": "anglais.pdf",
+    "pages": 72
+  },
+  {
+    "id": 4,
+    "nom": "Sciences expérimentales",
+    "fichier": "sciences.pdf",
+    "pages": 80
+  },
+  {
+    "id": 5,
+    "nom": "EMCI",
+    "fichier": "emci.pdf",
+    "pages": 72
+  },
+  {
+    "id": 6,
+    "nom": "Histoire et géographie",
+    "fichier": "histoire_geographie.pdf",
+    "pages": 119
+  }
+]
