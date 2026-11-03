@@ -1,0 +1,16 @@
+name: Tests module Apprendre à lire
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [feature/apprendre-a-lire-toutes-sequences]
+jobs:
+  reading-module:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Vérifier le module de lecture
+        run: npm run test:reading
