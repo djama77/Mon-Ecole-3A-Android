@@ -15,7 +15,7 @@ Le générateur ne doit jamais inventer un texte du manuel, une consigne, une r�
 5. **Prévisualiser la leçon** : lecteur mobile, narration, sous-titres et navigation par scène.
 6. **Faire participer l'élève** : questions intégrées entre les scènes, exercices après la vidéo, correction expliquée et possibilité de recommencer.
 7. **Suivre les acquis** : score par compétence, erreurs fréquentes et notions à revoir.
-8. **Exporter** : vidéo MP4 lorsque le service de rendu est disponible, et toujours une version HTML interactive légère utilisable sur Android.
+8. **Utiliser dans l'application** : la leçon interactive reste dans Mon École 3A ; aucun export vidéo séparé n'est nécessaire.
 
 ## Architecture proposée
 
@@ -24,7 +24,7 @@ Le générateur ne doit jamais inventer un texte du manuel, une consigne, une r�
 - **OCR** : extraction depuis PDF/photo, avec validation humaine obligatoire avant publication.
 - **Génération pédagogique** : produire un plan de leçon, des explications adaptées au niveau 3e année, un storyboard et des questions à partir des seules sources validées.
 - **Voix et sous-titres** : synthèse vocale disponible sur l'appareil quand possible ; sous-titres synchronisés et transcript toujours visibles.
-- **Rendu vidéo** : service de rendu séparé du site web (par exemple pipeline Remotion/FFmpeg). Ne pas lancer un rendu vidéo lourd dans une fonction serverless Vercel.
+- **Lecture intégrée** : scènes issues du texte source, narration par la synthèse vocale du téléphone, sous-titres et exercices dans le même écran. La lecture doit rester légère pour Android.
 - **Stockage** : conserver les leçons structurées et les exports ; prévoir une mise en cache locale Android. Ne pas téléverser les vidéos personnelles sans action explicite de l'enseignant.
 
 ## Projets open source étudiés comme références
@@ -45,10 +45,10 @@ Ces projets sont des références d'architecture, pas des dépendances à copier
 - Lire les scènes avec voix du téléphone et afficher les sous-titres.
 - Faire fonctionner le parcours sans connexion après téléchargement.
 
-### Étape 2 — génération vidéo
-- Ajouter un service de rendu isolé qui transforme le storyboard en MP4 avec images, transitions, narration et sous-titres.
-- Ajouter une file d'attente, un état de rendu et une reprise en cas d'échec.
-- Tester la taille des vidéos et les performances sur téléphone Android d'entrée de gamme.
+### Étape 2 — enrichissement du lecteur intégré
+- Ajouter l'extraction OCR des PDF/photos, puis exiger une validation humaine du texte et de la page source.
+- Ajouter des illustrations pédagogiques et une synchronisation plus précise de la narration et des sous-titres.
+- Tester les performances sur téléphone Android d'entrée de gamme et le fonctionnement hors connexion.
 
 ### Étape 3 — programme complet
 - Intégrer les semaines une par une à partir des pages réelles du manuel et du guide.
@@ -61,5 +61,5 @@ Ces projets sont des références d'architecture, pas des dépendances à copier
 - Une correction explique pourquoi la réponse est correcte, pas seulement la lettre attendue.
 - L'élève peut mettre en pause, reprendre, revoir une scène et refaire les exercices.
 - La progression est enregistrée localement et fonctionne hors connexion.
-- Le rendu vidéo ne bloque pas l'application Android.
+- La leçon, la narration, les questions et les corrections fonctionnent dans l'application Android sans export.
 - Tests automatiques du schéma de leçon, des références de page, du quiz et du lecteur.
