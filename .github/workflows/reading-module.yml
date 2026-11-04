@@ -1,0 +1,25 @@
+name: Tests du parcours pédagogique
+
+on:
+  pull_request:
+    branches:
+      - feature/apprendre-a-lire-toutes-sequences
+  push:
+    branches:
+      - feature/generateur-videos-semaines
+
+permissions:
+  contents: read
+
+jobs:
+  reading-module:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Vérifier les parcours de lecture et les leçons interactives
+        run: npm run test:reading
