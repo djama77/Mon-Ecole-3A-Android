@@ -17,12 +17,7 @@ async function extractPdf(file) {
 }
 async function extractImage(file) {
  const dataUrl = await new Promise((resolve,reject) => { const r=new FileReader(); r.onload=()=>resolve(r.result); r.onerror=reject; r.readAsDataURL(file); });
- try {
-  const {registerPlugin} = await import('@capacitor/core');
-  const ocr = registerPlugin('OfflineOcr');
-  const result = await ocr.recognize({base64:dataUrl});
-  return result.text || '';
- } catch (_) { return ''; }
+ try { return await window.recognizeTeacherImage(dataUrl); } catch (_) { return ''; }
 }
 $('teacherFile').addEventListener('change', async e => {
  const file = e.target.files && e.target.files[0]; if (!file) return;
