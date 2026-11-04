@@ -2,7 +2,7 @@
 const $ = id => document.getElementById(id);
 const endpoint = $('teacherEndpoint'), source = $('teacherSource'), chat = $('teacherChat');
 let history = [], busy = false;
-endpoint.value = localStorage.getItem('teacherEndpoint') || '';
+endpoint.value = localStorage.getItem('teacherEndpoint') || ((location.hostname !== 'localhost' && location.hostname !== '127.0.0.1' && !location.hostname.endsWith('.localhost')) ? location.origin + '/api/teacher' : '');
 endpoint.addEventListener('change', () => localStorage.setItem('teacherEndpoint', endpoint.value.trim()));
 function add(role, value) { const labels = {assistant:'Professeur',user:'Élève'}; chat.textContent += '\n\n' + labels[role] + ' : ' + value; chat.scrollTop = chat.scrollHeight; }
 async function extractPdf(file) {
