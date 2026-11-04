@@ -48,3 +48,15 @@ Le dépôt devrait rester privé tant que les droits de redistribution des guide
 - Leçon « Mon école » : questions à choix multiples avec correction immédiate, défi de vocabulaire, lecture audio du résumé et suivi local des résultats.
 - Les vidéos reçues dans la conversation sont des fichiers identiques ; elles ne sont pas intégrées au dépôt car le connecteur GitHub utilisé ici ne permet pas d'ajouter directement ces binaires. L'élève peut les sélectionner dans la page Prof assistante depuis son téléphone.
 - Contrôles statiques complémentaires ajoutés au test `npm run test:reading`.
+
+
+## Leçons interactives par semaine
+- Accès depuis l'accueil : « LEÇONS VIDÉO — apprendre et faire les exercices ».
+- Création d'une leçon à partir du texte exact du manuel ou du guide du maître, avec semaine, matière, objectif et référence de page.
+- Le texte est découpé en scènes affichées dans le lecteur intégré ; narration par la synthèse vocale française du téléphone et sous-titres activables.
+- L'enseignant saisit les questions, les choix, la réponse et l'explication du corrigé à partir de la source officielle.
+- Les leçons sont conservées localement sur l'appareil. Aucun export vidéo n'est nécessaire.
+- Une leçon n'est marquée « source vérifiée » que si une référence est renseignée et que l'enseignant confirme avoir comparé le texte à l'original.
+- Limites : l'import PDF/photo est actuellement un sélecteur de fichier, pas un OCR de cette page ; la transcription doit être saisie/collée et vérifiée. Les contenus restent locaux au navigateur/appareil.
+- Les semaines dont les pages officielles ne sont pas disponibles ne sont pas remplies avec du contenu inventé. Le dépôt ne contient pas encore les sept guides CRIPEN ; les documents sources doivent être fournis avant de construire le programme complet.
+- Tests statiques : `npm run test:reading`. Leur exécution et la compilation Android doivent être confirmées dans GitHub Actions.
