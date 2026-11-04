@@ -1,6 +1,6 @@
 import { registerPlugin } from '@capacitor/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-const ocr=registerPlugin('OfflineOcr');const $=id=>document.getElementById(id);async function initialise(){const books=await(await fetch('catalogue.json')).json();
+const ocr=registerPlugin('OfflineOcr');window.recognizeTeacherImage=async dataUrl=>{const res=await ocr.recognize({base64:dataUrl});return res.text||''};const $=id=>document.getElementById(id);async function initialise(){const books=await(await fetch('catalogue.json')).json();
 for(const b of books){const opt=document.createElement('option');opt.value=b.id;opt.textContent=b.nom;$('book').append(opt)}
 pdfjsLib.GlobalWorkerOptions.workerSrc='pdf.worker.js';let pdf=null,rendering=false;let current=1;
 async function loadBook(){try{$('pdfstatus').textContent='Ouverture du guide…';const b=books[Number($('book').value)];pdf=await pdfjsLib.getDocument('guides/'+b.fichier).promise;current=1;$('page').max=pdf.numPages;$('total').textContent='/ '+pdf.numPages;await render()}catch(e){$('pdfstatus').textContent='Erreur PDF : '+e.message}}
