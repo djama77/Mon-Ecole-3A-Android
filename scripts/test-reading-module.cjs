@@ -14,6 +14,8 @@ if(!home.includes('prof-assistante.html'))throw new Error('Lien prof assistante 
 console.log('OK — prof assistante : vidéo locale, quiz interactif, vocabulaire, audio et progression.');
 
 const studio=fs.readFileSync(path.join(root,'www/studio-videos.html'),'utf8');
-for(const s of ['id="week"','id="verified"','id="screen"','id="play"','id="checkpoint"','id="exercise"','id="export"','MediaRecorder','SpeechSynthesisUtterance','localStorage'])if(!studio.includes(s))throw new Error('Studio vidéo : élément absent '+s);
-if(!home.includes('studio-videos.html'))throw new Error('Lien studio vidéo absent de l’accueil.');
-console.log('OK — studio vidéo : storyboard par scènes, narration, sous-titres, quiz, exercices, progression et export conditionnel.');
+for(const s of ['id="week"','id="subject"','id="sourceRef"','id="verified"','id="teacherValidated"','id="createLesson"','id="playerSection"','id="play"','id="pause"','id="quiz"','id="addQuestion"','localStorage','SpeechSynthesisUtterance'])if(!studio.includes(s))throw new Error('Leçons interactives : élément absent '+s);
+if(!home.includes('studio-videos.html'))throw new Error('Lien des leçons interactives absent de l’accueil.');
+if(studio.includes('MediaRecorder')||studio.includes('id="export"'))throw new Error('Un export vidéo inutile est encore présent.');
+if(!studio.includes('sourceRef&&$(\'teacherValidated\').checked'))throw new Error('Validation de source enseignant absente.');
+console.log('OK — leçons par semaine : source référencée, validation enseignant, scènes depuis le texte, narration, quiz/corrigés saisis et stockage local, sans export.');
