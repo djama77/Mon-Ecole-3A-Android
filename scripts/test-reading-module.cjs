@@ -12,3 +12,8 @@ for(const s of ['id="videoFile"','<video id="player"','id="quiz"','id="wordChoic
 const home=fs.readFileSync(path.join(root,'www/index.html'),'utf8');
 if(!home.includes('prof-assistante.html'))throw new Error('Lien prof assistante absent de l’accueil.');
 console.log('OK — prof assistante : vidéo locale, quiz interactif, vocabulaire, audio et progression.');
+
+const studio=fs.readFileSync(path.join(root,'www/studio-videos.html'),'utf8');
+for(const s of ['id="week"','id="verified"','id="screen"','id="play"','id="checkpoint"','id="exercise"','id="export"','MediaRecorder','SpeechSynthesisUtterance','localStorage'])if(!studio.includes(s))throw new Error('Studio vidéo : élément absent '+s);
+if(!home.includes('studio-videos.html'))throw new Error('Lien studio vidéo absent de l’accueil.');
+console.log('OK — studio vidéo : storyboard par scènes, narration, sous-titres, quiz, exercices, progression et export conditionnel.');
