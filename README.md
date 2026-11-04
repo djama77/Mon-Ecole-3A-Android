@@ -28,3 +28,26 @@ Sur GitHub : **Actions → Android APK hors ligne → Run workflow**, puis récu
 La correction automatique de toutes les matières, des schémas et de l'écriture arabe nécessite encore un véritable modèle multimodal local, absent de cette V3. Les fichiers PDF d'origine doivent également être testés sur Android, car certains semblent mal formés.
 
 Le dépôt devrait rester privé tant que les droits de redistribution des guides n'ont pas été clarifiés.
+
+
+## Professeur numérique (PDF et photos)
+
+Le mode **Mon professeur numérique** accepte un PDF ou une photo depuis Android :
+- PDF : extraction du texte avec PDF.js (jusqu'aux 30 premières pages, 30 000 caractères).
+- Photo : OCR local ML Kit sur Android ; relire et corriger le texte reconnu avant la séance.
+- Le professeur explique pas à pas, pose une question à la fois et corrige les réponses.
+- La séance est envoyée à un endpoint serveur compatible avec l'API OpenAI Chat Completions. La clé IA n'est jamais enregistrée dans l'application.
+
+### Configuration du serveur IA
+
+Déployer ce dépôt sur Vercel, puis définir ces variables dans **Settings → Environment Variables** :
+
+- `TEACHER_API_KEY` : clé API du fournisseur compatible OpenAI.
+- `TEACHER_MODEL` : identifiant exact du modèle autorisé par le fournisseur.
+- `TEACHER_API_BASE_URL` : URL de base du fournisseur (facultatif ; défaut `https://api.openai.com/v1`).
+
+Après redéploiement, la version web renseigne automatiquement `/api/teacher`. Dans l'APK, saisir l'URL HTTPS complète du serveur Vercel dans le champ **Adresse du serveur professeur**. Ne jamais mettre une clé API dans l'APK.
+
+### Limites à connaître
+
+L'OCR actuel vise principalement le texte latin ; l'arabe manuscrit, les schémas et les tableaux complexes peuvent nécessiter une transcription ou une vérification manuelle. Le PDF doit contenir du texte extractible : un PDF constitué uniquement de pages scannées devra être converti en images et reconnu par OCR dans une évolution ultérieure. Les PDF des guides CRIPEN restent facultatifs pour ce mode : l'élève peut importer son propre document.

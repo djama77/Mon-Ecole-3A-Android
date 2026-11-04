@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/teacher.js": {
+      "maxDuration": 30
+    }
+  }
+}
