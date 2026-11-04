@@ -1,0 +1,28 @@
+name: Vérification professeur numérique
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "www/teacher.js"
+      - "www/index.html"
+      - "api/teacher.js"
+      - "vercel.json"
+      - ".github/workflows/teacher-checks.yml"
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Vérifier la syntaxe JavaScript
+        run: |
+          node --check www/teacher.js
+          node --check api/teacher.js
+      - name: Vérifier les éléments d'intégration
+        run: |
+          grep -q 'teacher.js' www/index.html
+          grep -q 'TEACHER_API_KEY' api/teacher.js
+          grep -q 'TEACHER_MODEL' api/teacher.js
+          test -f vercel.json
