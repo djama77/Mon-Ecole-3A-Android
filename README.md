@@ -40,3 +40,11 @@ Le dépôt devrait rester privé tant que les droits de redistribution des guide
 - Tests statiques : npm run test:reading.
 
 **Limite documentaire :** les sept pages du PDF transmis ne permettent pas de reconstituer de manière fiable toutes les semaines et séquences du manuel. Seules les lectures suffisamment lisibles sont intégrées ; les autres ne sont pas inventées. Le texte et la ponctuation doivent être relus contre la page source avant diffusion pédagogique.
+
+
+## Prof assistante interactive
+- Nouveau parcours accessible depuis l'accueil : `www/prof-assistante.html`.
+- Lecture de vidéos choisies depuis la galerie ou les fichiers Android, avec commandes lire/pause/recommencer. Les vidéos sont lues localement et ne sont pas envoyées à un serveur.
+- Leçon « Mon école » : questions à choix multiples avec correction immédiate, défi de vocabulaire, lecture audio du résumé et suivi local des résultats.
+- Les vidéos reçues dans la conversation sont des fichiers identiques ; elles ne sont pas intégrées au dépôt car le connecteur GitHub utilisé ici ne permet pas d'ajouter directement ces binaires. L'élève peut les sélectionner dans la page Prof assistante depuis son téléphone.
+- Contrôles statiques complémentaires ajoutés au test `npm run test:reading`.
